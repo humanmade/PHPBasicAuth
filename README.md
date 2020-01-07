@@ -87,6 +87,14 @@ Created by Human Made to force authentication to view development and staging en
 
 Maintained by [Chris Reynolds](https://github.com/jazzsequence).
 
+## Changelog
+
+### 1.0.1
+* Flipped the logic of the admin setting from checking to _disable_ basic authentication to checking to _enable_ basic authentication, and defaulting to environment-based settings.
+
+### 1.0
+* Initial release
+
 ---------------------
 
 Made with ❤️ by [Human Made](https://humanmade.com)
