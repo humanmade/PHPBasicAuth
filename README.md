@@ -1,7 +1,7 @@
 <img src="https://humanmade.com/content/themes/humanmade/lib/hm-pattern-library/assets/images/logos/logo-red.svg" width="100" alt="Human Made Logo" />
 
 # PHP Basic Auth
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/humanmade/PHPBasicAuth) ![GitHub](https://img.shields.io/github/license/humanmade/PHPBasicAuth) 
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/humanmade/PHPBasicAuth)](https://github.com/humanmade/PHPBasicAuth/releases) [![GitHub](https://img.shields.io/github/license/humanmade/PHPBasicAuth)](https://github.com/humanmade/PHPBasicAuth/blob/master/LICENSE)
 
 Basic PHP authentication for Human Made Dev and Staging environments.
 
