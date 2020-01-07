@@ -22,7 +22,7 @@ function bootstrap() {
  */
 function register_settings() {
 	if ( defined( 'HM_DEV' ) && HM_DEV ) {
-		register_setting( 'general', 'hm-basic-auth' );
+		register_setting( 'general', 'hm-basic-auth', [ 'sanitize_callback' => __NAMESPACE__ . '\\basic_auth_sanitization_callback' ] );
 
 		add_settings_field(
 			'hm-basic-auth',
@@ -46,4 +46,19 @@ function basic_auth_setting_callback() {
 		<?php esc_html_e( 'When checked, Basic Authentication will be required for this environment. The default is for this to be active on dev and staging environments.', 'hm-basic-auth' ); ?>
 	</span>
 	<?php
+}
+
+/**
+ * Sanitization callback for the hm-basic-auth setting.
+ *
+ * Explicitly stores "off" if the setting has been turned off, and "on" if it has been activated.
+ *
+ * @param string $value "off" or "on" based on whether the checkbox was ticked.
+ */
+function basic_auth_sanitization_callback( $value ) : string {
+	if ( empty( $value ) ) {
+		return 'off';
+	}
+
+	return 'on';
 }
