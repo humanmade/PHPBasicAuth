@@ -4,7 +4,7 @@
  * Description: Basic PHP authentication for HM Dev and Staging environments.
  * Author: Human Made Limited
  * Author URI: https://humanmade.com
- * Version: 1.0
+ * Version: 1.0.1
  *
  * @package HM\BasicAuth
  */
