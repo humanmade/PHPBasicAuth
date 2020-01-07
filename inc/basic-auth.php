@@ -1,10 +1,8 @@
 <?php
 /**
- * Plugin Name: HM Basic Auth
- * Description: Basic PHP authentication for HM Dev and Staging environments.
- * Author: Human Made Limited
- * Author URI: https://humanmade.com
- * Version: 1.0
+ * Basic authentication
+ *
+ * Handles sending the actual PHP authentication headers if enabled or the environment requires them.
  *
  * @package HM\BasicAuth
  */
@@ -19,8 +17,12 @@ namespace HM\BasicAuth;
 function require_auth() {
 	$override_basic_auth = get_option( 'hm-basic-auth' );
 
-	// Bail early if we're overriding.
-	if ( '1' === $override_basic_auth ) {
+	if (
+		// Bail if basic auth has been disabled...
+		( ! $basic_auth || 'off' === $basic_auth ) ||
+		// ...or if HM_DEV isn't defined or explicitly false.
+		( ! defined( 'HM_DEV' ) || defined( 'HM_DEV' ) && ! HM_DEV )
+	) {
 		return;
 	}
 

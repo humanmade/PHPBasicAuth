@@ -1,10 +1,8 @@
 <?php
 /**
- * Plugin Name: HM Basic Auth
- * Description: Basic PHP authentication for HM Dev and Staging environments.
- * Author: Human Made Limited
- * Author URI: https://humanmade.com
- * Version: 1.0
+ * Basic Authentication
+ *
+ * Handles the WordPress hooks and callbacks for the admin override of the basic authentication as defined by the environment settings.
  *
  * @package HM\BasicAuth
  */
@@ -24,11 +22,11 @@ function bootstrap() {
  */
 function register_settings() {
 	if ( defined( 'HM_DEV' ) && HM_DEV ) {
-		register_setting( 'general', 'hm-basic-auth' );
+		register_setting( 'general', 'hm-basic-auth', [ 'sanitize_callback' => __NAMESPACE__ . '\\basic_auth_sanitization_callback' ] );
 
 		add_settings_field(
 			'hm-basic-auth',
-			__( 'Disable Basic Authentication', 'hm-basic-auth' ),
+			__( 'Enable Basic Authentication', 'hm-basic-auth' ),
 			__NAMESPACE__ . '\\basic_auth_setting_callback',
 			'general',
 			'default',
@@ -41,11 +39,27 @@ function register_settings() {
  * The basic auth override setting.
  */
 function basic_auth_setting_callback() {
-	$checked = get_option( 'hm-basic-auth' );
+	$hm_dev  = defined( 'HM_DEV' ) ? absint( HM_DEV ) : false;
+	$checked = get_option( 'hm-basic-auth' ) ?: $hm_dev;
 	?>
-	<input type="checkbox" name="hm-basic-auth" value="1" <?php checked( $checked, 1 ); ?> />
+	<input type="checkbox" name="hm-basic-auth" value="on" <?php checked( $checked, 'on' ); ?> />
 	<span class="description">
-		<?php esc_html_e( 'If checked, this will disable the Basic Authentication for this environment.', 'hm-basic-auth' ); ?>
+		<?php esc_html_e( 'When checked, Basic Authentication will be required for this environment. The default is for this to be active on dev and staging environments.', 'hm-basic-auth' ); ?>
 	</span>
 	<?php
+}
+
+/**
+ * Sanitization callback for the hm-basic-auth setting.
+ *
+ * Explicitly stores "off" if the setting has been turned off, and "on" if it has been activated.
+ *
+ * @param string $value "off" or "on" based on whether the checkbox was ticked.
+ */
+function basic_auth_sanitization_callback( $value ) : string {
+	if ( empty( $value ) ) {
+		return 'off';
+	}
+
+	return 'on';
 }

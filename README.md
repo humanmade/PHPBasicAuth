@@ -1,7 +1,7 @@
 <img src="https://humanmade.com/content/themes/humanmade/lib/hm-pattern-library/assets/images/logos/logo-red.svg" width="100" alt="Human Made Logo" />
 
 # PHP Basic Auth
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/humanmade/PHPBasicAuth) ![GitHub](https://img.shields.io/github/license/humanmade/PHPBasicAuth) 
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/humanmade/PHPBasicAuth)](https://github.com/humanmade/PHPBasicAuth/releases) [![GitHub](https://img.shields.io/github/license/humanmade/PHPBasicAuth)](https://github.com/humanmade/PHPBasicAuth/blob/master/LICENSE)
 
 Basic PHP authentication for Human Made Dev and Staging environments.
 
@@ -34,7 +34,7 @@ The final result should look something like this:
  * Author URI: http://hmn.md/
  * Version: 1.0
  *
- * @package PlayStation
+ * @package HM
  */
 
 if ( defined( 'WP_INSTALLING' ) && WP_INSTALLING ) {
@@ -86,6 +86,14 @@ You should also add these lines to your `wp-config-local.sample.php`.
 Created by Human Made to force authentication to view development and staging environments while still allowing those environments to be viewed in a logged-out state.
 
 Maintained by [Chris Reynolds](https://github.com/jazzsequence).
+
+## Changelog
+
+### 1.0.1
+* Flipped the logic of the admin setting from checking to _disable_ basic authentication to checking to _enable_ basic authentication, and defaulting to environment-based settings.
+
+### 1.0
+* Initial release
 
 ---------------------
 
