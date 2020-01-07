@@ -45,7 +45,7 @@ function is_development_environment() : bool {
  * We don't want basic auth in production.
  */
 function register_settings() {
-	if ( defined( 'HM_DEV' ) && HM_DEV ) {
+	if ( is_development_environment() ) {
 		register_setting( 'general', 'hm-basic-auth', [ 'sanitize_callback' => __NAMESPACE__ . '\\basic_auth_sanitization_callback' ] );
 
 		add_settings_field(
@@ -63,8 +63,7 @@ function register_settings() {
  * The basic auth override setting.
  */
 function basic_auth_setting_callback() {
-	$hm_dev  = defined( 'HM_DEV' ) ? absint( HM_DEV ) : false;
-	$checked = get_option( 'hm-basic-auth' ) ?: $hm_dev;
+	$checked = get_option( 'hm-basic-auth' ) ?: is_development_environment();
 	?>
 	<input type="checkbox" name="hm-basic-auth" value="on" <?php checked( $checked, 'on' ); ?> />
 	<span class="description">
