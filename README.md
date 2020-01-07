@@ -34,7 +34,7 @@ The final result should look something like this:
  * Author URI: http://hmn.md/
  * Version: 1.0
  *
- * @package PlayStation
+ * @package HM
  */
 
 if ( defined( 'WP_INSTALLING' ) && WP_INSTALLING ) {
