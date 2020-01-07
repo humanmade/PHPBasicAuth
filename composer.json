@@ -9,9 +9,9 @@
             "email": "chris@humanmade.com"
         }
     ],
-    "homepage": "https://github.com/humanmade/BasicAuth",
+    "homepage": "https://github.com/humanmade/PHPBasicAuth",
     "support": {
-        "issues": "https://github.com/humanmade/BasicAuth/issues"
+        "issues": "https://github.com/humanmade/PHPBasicAuth/issues"
     },
     "autoload": {
         "files": ["0_basic-auth.php"]
