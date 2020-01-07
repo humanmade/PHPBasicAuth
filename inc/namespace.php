@@ -11,10 +11,17 @@
 
 namespace HM\BasicAuth;
 
+/**
+ * Kick everything off.
+ */
 function bootstrap() {
 	add_action( 'admin_init', __NAMESPACE__ . '\\register_settings' );
 }
 
+/**
+ * Register the basic auth setting and the new settings field, but only if we're in a dev environment.
+ * We don't want basic auth in production.
+ */
 function register_settings() {
 	if ( defined( 'HM_DEV' ) && HM_DEV ) {
 		register_setting( 'general', 'hm-basic-auth' );
@@ -30,6 +37,9 @@ function register_settings() {
 	}
 }
 
+/**
+ * The basic auth override setting.
+ */
 function basic_auth_setting_callback() {
 	$checked = get_option( 'hm-basic-auth' );
 	?>
