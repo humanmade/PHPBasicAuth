@@ -17,6 +17,30 @@ function bootstrap() {
 }
 
 /**
+ * Checks if we're in a development environment.
+ *
+ * @return bool Returns true if we are in a dev or staging environment, false if not.
+ */
+function is_development_environment() : bool {
+	$hm_dev    = defined( 'HM_DEV' ) && HM_DEV;
+	$altis_dev = defined( 'HM_ENV_TYPE' ) && in_array( HM_ENV_TYPE, [ 'development', 'staging' ] );
+
+	/**
+	 * Allow our environments to be filtered outside of the plugin.
+	 *
+	 * @param bool
+	 */
+	$other_dev = apply_filters( 'hmauth_filter_dev_env', false );
+
+	// If any of the environment checks are true, we're in a dev environment.
+	if ( $hm_dev || $altis_dev || $other_dev ) {
+		return true;
+	}
+
+	return false;
+}
+
+/**
  * Register the basic auth setting and the new settings field, but only if we're in a dev environment.
  * We don't want basic auth in production.
  */
