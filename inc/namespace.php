@@ -39,9 +39,10 @@ function register_settings() {
  * The basic auth override setting.
  */
 function basic_auth_setting_callback() {
-	$checked = get_option( 'hm-basic-auth' );
+	$hm_dev  = defined( 'HM_DEV' ) ? absint( HM_DEV ) : false;
+	$checked = get_option( 'hm-basic-auth' ) ?: $hm_dev;
 	?>
-	<input type="checkbox" name="hm-basic-auth" value="1" <?php checked( $checked, 1 ); ?> />
+	<input type="checkbox" name="hm-basic-auth" value="on" <?php checked( $checked, 'on' ); ?> />
 	<span class="description">
 		<?php esc_html_e( 'When checked, Basic Authentication will be required for this environment. The default is for this to be active on dev and staging environments.', 'hm-basic-auth' ); ?>
 	</span>
