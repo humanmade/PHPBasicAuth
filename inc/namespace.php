@@ -26,7 +26,7 @@ function register_settings() {
 
 		add_settings_field(
 			'hm-basic-auth',
-			__( 'Disable Basic Authentication', 'hm-basic-auth' ),
+			__( 'Enable Basic Authentication', 'hm-basic-auth' ),
 			__NAMESPACE__ . '\\basic_auth_setting_callback',
 			'general',
 			'default',
@@ -43,7 +43,7 @@ function basic_auth_setting_callback() {
 	?>
 	<input type="checkbox" name="hm-basic-auth" value="1" <?php checked( $checked, 1 ); ?> />
 	<span class="description">
-		<?php esc_html_e( 'If checked, this will disable the Basic Authentication for this environment.', 'hm-basic-auth' ); ?>
+		<?php esc_html_e( 'When checked, Basic Authentication will be required for this environment. The default is for this to be active on dev and staging environments.', 'hm-basic-auth' ); ?>
 	</span>
 	<?php
 }
