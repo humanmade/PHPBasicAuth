@@ -7,6 +7,10 @@ Basic PHP authentication for Human Made Dev and Staging environments.
 ## Installation & Setup
 The composer file is set up to assume you want to install this package with other WordPress must-use vendor plugins. These setup instructions assume that all your composer-required must-use plugins are stored in a main `/mu-plugins/vendor` directory and that you are using a `loader.php` file to require them. You may need to adjust the configuration if your environment is different.
 
+After installation and setup, an option to override the default basic auth setting (detected by environment) will exist on the General settings page. This option allows you to disable the basic auth on dev or staging environments from the WordPress application.
+
+![screenshot of new setting](https://uc6f2b9f772644593e50f53e8473.previews.dropboxusercontent.com/p/thumb/AAqOi2KvI8SH00NPsiN1nI5jXBMQ46n1zu2KfHPJrIcSeJ9xheLLiDIOS1KFWbycOI-c5wIBDP5hSOXRYoPevZMTDUSkzoF8Gf5AJAydyU7PXvGZtniwjjP-Jhq63a2k5QveU0q3dvtYwvk6VTvghdN-SN0Nwtjlx3WmKA7WXwd2PHGnZ-tEUU2h7ZegArIjSaT3oy64AnP_JoHm_Wqp4FZ4h4RN6tqAvuQeVSqKyI20ReQeSDNyTFWTP-9BHmV1g3Fpvst2KYfo7kwnBARhKct_C8z-wnyegeUqD0V9nfdWLHqYOceubrbS640ommmPksyhUydaj5ML-AYqKr9Kd57iXLezzpFk20ZeTaVwNylmBgub10R2vGWJKIQzXCGw0ceJAN2pF0TOFPmz-BOln2S0tF8WugTeGTUX6fBxNt3-5HF-73xBL5NJnJrGKZjSS8m0noC3Q4J2Ezyi4Q5zGXL_je8wbFcVdAwOq0exXjlT1Q/p.png?fv_content=true)
+
 ### Step 1
 Install the plugin via `composer`.
 
