@@ -1,5 +1,5 @@
 {
-    "name": "humanmade/basic-auth",
+    "name": "humanmade/php-basic-auth",
     "description": "Basic PHP authentication for HM Dev and Staging environments.",
     "type": "wordpress-muplugin",
     "license": "GPL-3.0-or-later",
