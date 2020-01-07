@@ -15,7 +15,7 @@ namespace HM\BasicAuth;
  * Basic auth username and password should be set wherever constants for the site are defined.
  */
 function require_auth() {
-	$override_basic_auth = get_option( 'hm-basic-auth' );
+	$basic_auth = get_option( 'hm-basic-auth' );
 
 	if (
 		// Bail if basic auth has been disabled...
