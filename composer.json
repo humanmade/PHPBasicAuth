@@ -1,0 +1,19 @@
+{
+    "name": "humanmade/basic-auth",
+    "description": "Basic PHP authentication for HM Dev and Staging environments.",
+    "type": "wordpress-muplugin",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Chris Reynolds",
+            "email": "chris@humanmade.com"
+        }
+    ],
+    "homepage": "https://github.com/humanmade/BasicAuth",
+    "support": {
+        "issues": "https://github.com/humanmade/BasicAuth/issues"
+    },
+    "autoload": {
+        "files": ["0_basic-auth.php"]
+    }
+}
