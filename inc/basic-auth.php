@@ -1,10 +1,8 @@
 <?php
 /**
- * Plugin Name: HM Basic Auth
- * Description: Basic PHP authentication for HM Dev and Staging environments.
- * Author: Human Made Limited
- * Author URI: https://humanmade.com
- * Version: 1.0
+ * Basic authentication
+ *
+ * Handles sending the actual PHP authentication headers if enabled or the environment requires them.
  *
  * @package HM\BasicAuth
  */
