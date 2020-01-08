@@ -121,6 +121,7 @@ function require_auth() {
 	// Check for a basic auth user and password.
 	if ( defined( 'HM_BASIC_AUTH_PW' ) && defined( 'HM_BASIC_AUTH_USER' ) ) {
 		header( 'Cache-Control: no-cache, must-revalidate, max-age=0' );
+		$site_name = get_option( 'blogname' );
 
 		$has_supplied_credentials = ! empty( $_SERVER['PHP_AUTH_USER'] ) && ! empty( $_SERVER['PHP_AUTH_PW'] );
 		$is_not_authenticated     = (
@@ -131,7 +132,7 @@ function require_auth() {
 
 		if ( $is_not_authenticated ) {
 			header( 'HTTP/1.1 401 Authorization Required' );
-			header( 'WWW-Authenticate: Basic realm="Access denied"' );
+			header( "WWW-Authenticate: Basic realm=\"$site_name development site login\"" );
 			exit;
 		}
 	}
