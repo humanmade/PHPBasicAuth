@@ -63,13 +63,8 @@ function register_settings() {
  * The basic auth override setting.
  */
 function basic_auth_setting_callback() {
-	/*
-	 * If hm-basic-auth is false or empty, it means we haven't stored a value
-	 * yet.
-	 * Use the is_development_environment value here to default to the default,
-	 * environment-controlled setup.
-	 */
-	$checked = get_option( 'hm-basic-auth' ) ?: is_development_environment();
+	$hm_dev  = is_development_environment() ? 'on' : 'off';
+	$checked = get_option( 'hm-basic-auth' ) ?: $hm_dev;
 	?>
 	<input type="checkbox" name="hm-basic-auth" value="on" <?php checked( $checked, 'on' ); ?> />
 	<span class="description">
