@@ -15,5 +15,8 @@
     },
     "autoload": {
         "files": ["0_basic-auth.php"]
+    },
+    "require-dev": {
+        "humanmade/coding-standards": "^0.7.0"
     }
 }
