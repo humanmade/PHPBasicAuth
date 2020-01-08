@@ -4,7 +4,10 @@
 
 	<!-- Use HM Coding Standards -->
 	<rule ref="vendor/humanmade/coding-standards">
-		<exclude name="HM.Files.FunctionFileName.WrongFile" />
+	</rule>
+
+	<rule ref="HM.Files.FunctionFileName.WrongFile">
+		<exclude-pattern>inc/basic-auth.php</exclude-pattern>
 	</rule>
 
 	<!-- Add PHPDoc rules -->
