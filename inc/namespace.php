@@ -17,11 +17,35 @@ function bootstrap() {
 }
 
 /**
+ * Checks if we're in a development environment.
+ *
+ * @return bool Returns true if we are in a dev or staging environment, false if not.
+ */
+function is_development_environment() : bool {
+	$hm_dev    = defined( 'HM_DEV' ) && HM_DEV;
+	$altis_dev = defined( 'HM_ENV_TYPE' ) && in_array( HM_ENV_TYPE, [ 'development', 'staging' ] );
+
+	/**
+	 * Allow our environments to be filtered outside of the plugin.
+	 *
+	 * @param bool
+	 */
+	$other_dev = apply_filters( 'hmauth_filter_dev_env', false );
+
+	// If any of the environment checks are true, we're in a dev environment.
+	if ( $hm_dev || $altis_dev || $other_dev ) {
+		return true;
+	}
+
+	return false;
+}
+
+/**
  * Register the basic auth setting and the new settings field, but only if we're in a dev environment.
  * We don't want basic auth in production.
  */
 function register_settings() {
-	if ( defined( 'HM_DEV' ) && HM_DEV ) {
+	if ( is_development_environment() ) {
 		register_setting( 'general', 'hm-basic-auth', [ 'sanitize_callback' => __NAMESPACE__ . '\\basic_auth_sanitization_callback' ] );
 
 		add_settings_field(
@@ -39,7 +63,7 @@ function register_settings() {
  * The basic auth override setting.
  */
 function basic_auth_setting_callback() {
-	$hm_dev  = defined( 'HM_DEV' ) ? absint( HM_DEV ) : false;
+	$hm_dev  = is_development_environment() ? 'on' : 'off';
 	$checked = get_option( 'hm-basic-auth' ) ?: $hm_dev;
 	?>
 	<input type="checkbox" name="hm-basic-auth" value="on" <?php checked( $checked, 'on' ); ?> />
@@ -62,4 +86,40 @@ function basic_auth_sanitization_callback( $value ) : string {
 	}
 
 	return 'on';
+}
+
+/**
+ * Require PHP Basic authentication.
+ *
+ * Basic auth username and password should be set wherever constants for the site are defined.
+ */
+function require_auth() {
+	$basic_auth = get_option( 'hm-basic-auth' );
+
+	if (
+		// Bail if basic auth has been disabled...
+		( ! $basic_auth || 'off' === $basic_auth ) ||
+		// ...or if the development environment isn't defined or explicitly false.
+		( ! is_development_environment() )
+	) {
+		return;
+	}
+
+	// Check for a basic auth user and password.
+	if ( defined( 'HM_BASIC_AUTH_PW' ) && defined( 'HM_BASIC_AUTH_USER' ) ) {
+		header( 'Cache-Control: no-cache, must-revalidate, max-age=0' );
+
+		$has_supplied_credentials = ! empty( $_SERVER['PHP_AUTH_USER'] ) && ! empty( $_SERVER['PHP_AUTH_PW'] );
+		$is_not_authenticated     = (
+			! $has_supplied_credentials ||
+			$_SERVER['PHP_AUTH_USER'] !== HM_BASIC_AUTH_USER ||
+			$_SERVER['PHP_AUTH_PW'] !== HM_BASIC_AUTH_PW
+		);
+
+		if ( $is_not_authenticated ) {
+			header( 'HTTP/1.1 401 Authorization Required' );
+			header( 'WWW-Authenticate: Basic realm="Access denied"' );
+			exit;
+		}
+	}
 }
