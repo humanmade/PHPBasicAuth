@@ -20,8 +20,8 @@ function require_auth() {
 	if (
 		// Bail if basic auth has been disabled...
 		( ! $basic_auth || 'off' === $basic_auth ) ||
-		// ...or if HM_DEV isn't defined or explicitly false.
-		( ! defined( 'HM_DEV' ) || defined( 'HM_DEV' ) && ! HM_DEV )
+		// ...or if the development environment isn't defined or explicitly false.
+		( ! is_development_environment() )
 	) {
 		return;
 	}
