@@ -32,8 +32,21 @@ function is_development_environment() : bool {
 	 */
 	$other_dev = apply_filters( 'hmauth_filter_dev_env', false );
 
-	// If any of the environment checks are true, we're in a dev environment.
-	if ( $hm_dev || $altis_dev || $other_dev ) {
+	// Don't require auth for AJAX requests.
+	$exclude_ajax   = ! defined( 'DOING_AJAX' ) || false === DOING_AJAX;
+	// Don't require auth if we're in wp-cli.
+	$exclude_wp_cli = ! defined( 'WP_CLI' ) || false === WP_CLI;
+	// Don't require auth when running cron jobs.
+	$exclude_cron   = ! defined( 'DOING_CRON' ) || false === DOING_CRON;
+
+	$exclude = $exclude_ajax && $exclude_wp_cli && $exclude_cron;
+
+	if (
+		// WordPress exclusions.
+		$exclude &&
+		// If any of the environment checks are true, we're in a dev environment.
+		( $hm_dev || $altis_dev || $other_dev )
+	) {
 		return true;
 	}
 

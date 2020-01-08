@@ -51,7 +51,7 @@ $global_mu_plugins = [
 ### Step 3
 Define a `HM_BASIC_AUTH_USER` and `HM_BASIC_AUTH_PW` wherever constants are defined in your project. This could be your main `wp-config.php` file or a separate `.config/constants.php` file. 
 
-**Note:** The constant declarations _must_ be inside a `HM_DEV` environment check, otherwise the basic authentication will be loaded on all environments. You may also want to disable basic authentication on local environments. 
+**Note:** The constant declarations _must_ be inside a `HM_DEV` or `HM_ENV_TYPE` environment check, otherwise the basic authentication will be loaded on all environments. You may also want to disable basic authentication on local environments. 
 
 Your constant declarations should look something like this:
 
@@ -93,6 +93,7 @@ Maintained by [Chris Reynolds](https://github.com/jazzsequence).
 * Flipped the logic of the admin setting from checking to _disable_ basic authentication to checking to _enable_ basic authentication, and defaulting to environment-based settings.
 * Added a `is_development_environment` function which includes an added check for `HM_ENV_TYPE` as well as arbitrary definitions that could be added by a filter.
 * Updated "Basic Realm" to use the site name rather than "Access Denied"
+* Disabled basic auth if any of the following WordPress constants are defined and true: `WP_CLI`, `DOING_AJAX`, `DOING_CRON`.
 
 ### 1.0
 * Initial release
