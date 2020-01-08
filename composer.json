@@ -13,8 +13,10 @@
     "support": {
         "issues": "https://github.com/humanmade/PHPBasicAuth/issues"
     },
-    "autoload": {
-        "files": ["0_basic-auth.php"]
+    "scripts": {
+        "lint": [
+            "vendor/bin/phpcs --standard=./phpcs.ruleset.xml -p -s -v --extensions=php"
+        ]
     },
     "require-dev": {
         "humanmade/coding-standards": "^0.7.0"
