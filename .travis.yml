@@ -5,6 +5,10 @@ dist: xenial
 # Ensure PHP CLI and Composer are available.
 language: php
 
+# Start the db service
+services:
+  - mysql
+
 # Notification settings
 notifications:
   email:
