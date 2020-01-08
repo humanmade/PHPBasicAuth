@@ -11,7 +11,7 @@ The composer file is set up to assume you want to install this package with othe
 
 After installation and setup, an option to override the default basic auth setting (detected by environment) will exist on the General settings page. This option allows you to disable the basic auth on dev or staging environments from the WordPress application. By default the option will detect the environment and be checked if no setting is saved.
 
-![screenshot of new setting](https://uc4926cab7885c896549df2b6907.previews.dropboxusercontent.com/p/thumb/AAqwCvOEGE_cPh8YhNd8nFiBbsSULkz8KxwFo7RdEZSU348C_fBN2XXdzcfj2Tdf-XxNoen4G82vCVBlSUDwS9KMB4wSN8t7e7qtzK0Eo0v44cUiYhmFVtLalS0iLUg5sR5J2UGRTmbmP8EppCUiLZtFDYaQOcH0AIq6feZ2sNJFRrMIbS8_agap0NOYpv5b4EjLvwEbH6qGRMAo8Ml_yJXTH3yfzsaATpwU35u4ziSOarJ77-tF2W43S6ugA3GUIJr5HJAMXvfDxau2FjGJ9TToGGL5vbdtnYBqjYonydepYmC5t-cw5-M2cqzbYEZKOCGskHBI_fZDRVAD44sjmL7f_Bd1eT0fJ9wHXHZXXAEdFv9FkWPlO2imNSFGtAKcG0lV1uIjWjGHry5OwGaDkW9ya3APyBgayoqKp032Xz64ptART703FpUgSc6O8n8kJjg7CHrYaTz1xbiiKIe_G7pmXPbmGDnbWUBklRocVIvp6w/p.png)
+![screenshot of new setting](https://p94.f3.n0.cdn.getcloudapp.com/items/P8uY1xqw/Screenshot+2020-01-07+15.55.50.png?v=93007848bc828da7bd3aa512553a1f17)
 
 ### Step 1
 Install the plugin via `composer`.
@@ -21,7 +21,7 @@ composer require humanmade/PHPBasicAuth
 ```
 
 ### Step 2
-Add `'vendor/php-basic-auth/0_basic-auth.php'` to the array of must-use plugins in the `loader.php` file in the root of your `/mu-plugins` directory. Make sure it is the _first_ item in the array.
+Add `'vendor/php-basic-auth/plugin.php'` to the array of must-use plugins in the `loader.php` file in the root of your `/mu-plugins` directory. Make sure it is the _first_ item in the array.
 
 The final result should look something like this:
 
@@ -43,7 +43,7 @@ if ( defined( 'WP_INSTALLING' ) && WP_INSTALLING ) {
 
 // Plugins to be loaded for any site.
 $global_mu_plugins = [
-	'vendor/php-basic-auth/0_basic-auth.php',
+	'vendor/php-basic-auth/plugin.php',
 	/* ... other must-use plugins here ... */
 ];
 ```
@@ -51,7 +51,9 @@ $global_mu_plugins = [
 ### Step 3
 Define a `HM_BASIC_AUTH_USER` and `HM_BASIC_AUTH_PW` wherever constants are defined in your project. This could be your main `wp-config.php` file or a separate `.config/constants.php` file. 
 
-**Note:** The constant declarations _must_ be inside a `HM_DEV` environment check, otherwise the basic authentication will be loaded on all environments. You may also want to disable basic authentication on local environments. 
+**Note:** While not required, it's best to check that you are in a development environment before defining `HM_BASIC_AUTH_USER` and `HM_BASIC_AUTH_PW` to prevent the constant declarations from being defined in all environments. This adds an additional layer of protection against basic auth accidentally being loaded in production.
+
+You may also want to disable basic authentication on local environments. 
 
 Your constant declarations should look something like this:
 
@@ -81,20 +83,22 @@ defined( 'HM_LOCAL_DEV' ) or define( 'HM_LOCAL_DEV', true );
 
 You should also add these lines to your `wp-config-local.sample.php`.
 
+## Changelog
+
+### 1.1
+* Flipped the logic of the admin setting from checking to _disable_ basic authentication to checking to _enable_ basic authentication, and defaulting to environment-based settings.
+* Added a `is_development_environment` function which includes an added check for `HM_ENV_TYPE` as well as arbitrary definitions that could be added by a filter.
+* Updated "Basic Realm" to use the site name rather than "Access Denied"
+* Disabled basic auth if any of the following WordPress constants are defined and true: `WP_CLI`, `DOING_AJAX`, `DOING_CRON`.
+
+### 1.0
+* Initial release
+
 ## Credits
 
 Created by Human Made to force authentication to view development and staging environments while still allowing those environments to be viewed in a logged-out state.
 
 Maintained by [Chris Reynolds](https://github.com/jazzsequence).
-
-## Changelog
-
-### 1.0.1
-* Flipped the logic of the admin setting from checking to _disable_ basic authentication to checking to _enable_ basic authentication, and defaulting to environment-based settings.
-* Added a `is_development_environment` function which includes an added check for `HM_ENV_TYPE` as well as arbitrary definitions that could be added by a filter.
-
-### 1.0
-* Initial release
 
 ---------------------
 

@@ -32,8 +32,21 @@ function is_development_environment() : bool {
 	 */
 	$other_dev = apply_filters( 'hmauth_filter_dev_env', false );
 
-	// If any of the environment checks are true, we're in a dev environment.
-	if ( $hm_dev || $altis_dev || $other_dev ) {
+	// Don't require auth for AJAX requests.
+	$exclude_ajax   = ! defined( 'DOING_AJAX' ) || false === DOING_AJAX;
+	// Don't require auth if we're in wp-cli.
+	$exclude_wp_cli = ! defined( 'WP_CLI' ) || false === WP_CLI;
+	// Don't require auth when running cron jobs.
+	$exclude_cron   = ! defined( 'DOING_CRON' ) || false === DOING_CRON;
+
+	$exclude = $exclude_ajax && $exclude_wp_cli && $exclude_cron;
+
+	if (
+		// WordPress exclusions.
+		$exclude &&
+		// If any of the environment checks are true, we're in a dev environment.
+		( $hm_dev || $altis_dev || $other_dev )
+	) {
 		return true;
 	}
 
@@ -108,6 +121,7 @@ function require_auth() {
 	// Check for a basic auth user and password.
 	if ( defined( 'HM_BASIC_AUTH_PW' ) && defined( 'HM_BASIC_AUTH_USER' ) ) {
 		header( 'Cache-Control: no-cache, must-revalidate, max-age=0' );
+		$site_name = get_option( 'blogname' );
 
 		$has_supplied_credentials = ! empty( $_SERVER['PHP_AUTH_USER'] ) && ! empty( $_SERVER['PHP_AUTH_PW'] );
 		$is_not_authenticated     = (
@@ -118,7 +132,7 @@ function require_auth() {
 
 		if ( $is_not_authenticated ) {
 			header( 'HTTP/1.1 401 Authorization Required' );
-			header( 'WWW-Authenticate: Basic realm="Access denied"' );
+			header( "WWW-Authenticate: Basic realm=\"$site_name development site login\"" );
 			exit;
 		}
 	}
