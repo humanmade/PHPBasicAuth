@@ -81,12 +81,6 @@ defined( 'HM_LOCAL_DEV' ) or define( 'HM_LOCAL_DEV', true );
 
 You should also add these lines to your `wp-config-local.sample.php`.
 
-## Credits
-
-Created by Human Made to force authentication to view development and staging environments while still allowing those environments to be viewed in a logged-out state.
-
-Maintained by [Chris Reynolds](https://github.com/jazzsequence).
-
 ## Changelog
 
 ### 1.0.1
@@ -97,6 +91,12 @@ Maintained by [Chris Reynolds](https://github.com/jazzsequence).
 
 ### 1.0
 * Initial release
+
+## Credits
+
+Created by Human Made to force authentication to view development and staging environments while still allowing those environments to be viewed in a logged-out state.
+
+Maintained by [Chris Reynolds](https://github.com/jazzsequence).
 
 ---------------------
 
