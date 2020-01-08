@@ -1,4 +1,33 @@
-version: ~> 1.0
-import:
-  - humanmade/altis-dev-tools:altis.yml@3.0.0
-  - .config/travis.yml
+# Custom Travis configuration for humanmade/php-basic-auth.
+sudo: false
+dist: xenial
+
+# Ensure PHP CLI and Composer are available.
+language: php
+
+# Notification settings
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+
+# Cache composer dependencies by default
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+# Only run for PHP 7.2
+matrix:
+  include:
+    - php: 7.2
+
+# Install dependencies
+before_script:
+  - composer install
+
+# Settings here are merged and appended to the Altis base configuration.
+script:
+  # Run PHPCS
+  - composer run lint
+  # Run unit tests
+  - composer run test
