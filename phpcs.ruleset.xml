@@ -3,12 +3,7 @@
 	<description>Code sniffing rules for use with HM PHP Basic Auth plugin</description>
 
 	<!-- Use HM Coding Standards -->
-	<rule ref="vendor/humanmade/coding-standards">
-	</rule>
-
-	<rule ref="HM.Files.FunctionFileName.WrongFile">
-		<exclude-pattern>inc/basic-auth.php</exclude-pattern>
-	</rule>
+	<rule ref="vendor/humanmade/coding-standards" />
 
 	<!-- Add PHPDoc rules -->
 	<rule ref="WordPress-Docs" />
