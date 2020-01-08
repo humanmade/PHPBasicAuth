@@ -91,6 +91,7 @@ Maintained by [Chris Reynolds](https://github.com/jazzsequence).
 
 ### 1.0.1
 * Flipped the logic of the admin setting from checking to _disable_ basic authentication to checking to _enable_ basic authentication, and defaulting to environment-based settings.
+* Added a `is_development_environment` function which includes an added check for `HM_ENV_TYPE` as well as arbitrary definitions that could be added by a filter.
 
 ### 1.0
 * Initial release
