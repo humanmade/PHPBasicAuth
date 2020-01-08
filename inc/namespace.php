@@ -13,7 +13,6 @@ namespace HM\BasicAuth;
  * Kick everything off.
  */
 function bootstrap() {
-	add_action( 'muplugins_loaded', __NAMESPACE__ . '\\require_auth' );
 	add_action( 'admin_init', __NAMESPACE__ . '\\register_settings' );
 }
 

@@ -16,3 +16,4 @@ require_once( 'inc/basic-auth.php' );
 
 // Kick it off.
 bootstrap();
+require_auth();
