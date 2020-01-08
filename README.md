@@ -51,7 +51,7 @@ $global_mu_plugins = [
 ### Step 3
 Define a `HM_BASIC_AUTH_USER` and `HM_BASIC_AUTH_PW` wherever constants are defined in your project. This could be your main `wp-config.php` file or a separate `.config/constants.php` file. 
 
-**Note:** The constant declarations _must_ be inside a `HM_DEV` environment check, otherwise the basic authentication will be loaded on all environments. You may also want to disable basic authentication on local environments. 
+**Note:** The constant declarations _must_ be inside a `HM_DEV` or `HM_ENV_TYPE` environment check, otherwise the basic authentication will be loaded on all environments. You may also want to disable basic authentication on local environments. 
 
 Your constant declarations should look something like this:
 
