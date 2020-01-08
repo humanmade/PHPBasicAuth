@@ -1,0 +1,4 @@
+version: ~> 1.0
+import:
+  - humanmade/altis-dev-tools:altis.yml@3.0.0
+  - .config/travis.yml

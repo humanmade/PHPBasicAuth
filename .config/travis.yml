@@ -1,0 +1,7 @@
+# Custom Travis configuration.
+# Settings here are merged and appended to the Altis base configuration.
+script:
+  # Run PHPCS
+  - composer run lint
+  # Run unit tests
+  - composer dev-tools phpunit
