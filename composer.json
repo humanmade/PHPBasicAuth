@@ -21,7 +21,7 @@
             "phpunit"
         ],
         "setup": [
-            "bash .bin/install-wp-tests.sh \"wp_tests\" \"root\" \"\" \"127.0.0.1\""
+            "bash .bin/install-wp-tests.sh \"wp_tests\" \"root\" \"\" \"127.0.0.1\" latest"
         ]
     },
     "require-dev": {
