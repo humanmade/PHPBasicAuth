@@ -24,6 +24,8 @@ matrix:
 # Install dependencies
 before_script:
   - composer install
+  # Install PHPUnit
+  - composer run setup
 
 # Settings here are merged and appended to the Altis base configuration.
 script:
