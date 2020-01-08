@@ -21,7 +21,7 @@ composer require humanmade/PHPBasicAuth
 ```
 
 ### Step 2
-Add `'vendor/php-basic-auth/0_basic-auth.php'` to the array of must-use plugins in the `loader.php` file in the root of your `/mu-plugins` directory. Make sure it is the _first_ item in the array.
+Add `'vendor/php-basic-auth/plugin.php'` to the array of must-use plugins in the `loader.php` file in the root of your `/mu-plugins` directory. Make sure it is the _first_ item in the array.
 
 The final result should look something like this:
 
@@ -43,7 +43,7 @@ if ( defined( 'WP_INSTALLING' ) && WP_INSTALLING ) {
 
 // Plugins to be loaded for any site.
 $global_mu_plugins = [
-	'vendor/php-basic-auth/0_basic-auth.php',
+	'vendor/php-basic-auth/plugin.php',
 	/* ... other must-use plugins here ... */
 ];
 ```
