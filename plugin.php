@@ -12,7 +12,6 @@
 namespace HM\BasicAuth;
 
 require_once( 'inc/namespace.php' );
-require_once( 'inc/basic-auth.php' );
 
 // Kick it off.
 bootstrap();
