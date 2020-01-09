@@ -90,6 +90,8 @@ You should also add these lines to your `wp-config-local.sample.php`.
 * Added a `is_development_environment` function which includes an added check for `HM_ENV_TYPE` as well as arbitrary definitions that could be added by a filter.
 * Updated "Basic Realm" to use the site name rather than "Access Denied"
 * Disabled basic auth if any of the following WordPress constants are defined and true: `WP_CLI`, `DOING_AJAX`, `DOING_CRON`.
+* Added unit tests
+* Added Travis CI integration
 
 ### 1.0
 * Initial release
