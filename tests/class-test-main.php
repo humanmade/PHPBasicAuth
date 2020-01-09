@@ -31,8 +31,35 @@ class Test_Main extends \WP_UnitTestCase {
 		$this->assertTrue(
 			is_development_environment()
 		);
+	}
 
-		// But false if we're running WP_CLI, cron or AJAX.
+	/**
+	 * Test that the basic auth setting is checked based purely on the environment settings.
+	 */
+	public function test_basic_auth_setting_callback_env_true() {
+		ob_start();
+		basic_auth_setting_callback();
+		$output         = ob_get_clean();
+		$trimmed_output = trim( str_replace( [ "\r", "\n" ], '', $output ) );
+
+		// Only run this test if we don't have an option defined. We don't want to accidentally pass this test.
+		if ( ! get_option( 'hm-basic-auth' ) ) {
+			$this->assertStringStartsWith(
+				'<input type="checkbox" name="hm-basic-auth" value="on"  checked=\'checked\' />',
+				$trimmed_output
+			);
+		} else {
+			// If an option was defined, explicitly fail this test.
+			$this->fail( __( 'The hm-basic-auth setting had a value when it shouldn\'t have. Could not test basic_auth_setting_callback input value based only on environment settings.', 'hm-basic-auth' ) );
+		}
+	}
+
+	/**
+	 * Test that we're no longer in a development environment when we define WordPress constants.
+	 */
+	public function test_retest_is_development_environment_for_wp_constants() {
+
+		// is_development_environment should be false if we're running WP_CLI, cron or AJAX.
 		define( 'WP_CLI', true );
 		define( 'DOING_CRON', true );
 		define( 'DOING_AJAX', true );
