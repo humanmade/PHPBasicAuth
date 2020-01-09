@@ -7,6 +7,9 @@
 
 namespace HM\BasicAuth;
 
+/**
+ * Main testing suite for HMBasicAuth plugin.
+ */
 class Test_Main extends \WP_UnitTestCase {
 	/**
 	 * Check a variety of conditions that would effect whether is_development_environment retuns true or false.
