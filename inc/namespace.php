@@ -109,12 +109,8 @@ function basic_auth_sanitization_callback( $value ) : string {
 function require_auth() {
 	$basic_auth = get_option( 'hm-basic-auth' );
 
-	if (
-		// Bail if basic auth has been disabled...
-		( ! $basic_auth || 'off' === $basic_auth ) ||
-		// ...or if the development environment isn't defined or explicitly false.
-		( ! is_development_environment() )
-	) {
+	// Bail if basic auth has been disabled or if the development environment isn't defined or explicitly false.
+	if ( 'off' === $basic_auth || ! is_development_environment() ) {
 		return;
 	}
 
