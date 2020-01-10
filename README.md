@@ -85,6 +85,9 @@ You should also add these lines to your `wp-config-local.sample.php`.
 
 ## Changelog
 
+### 1.1.1
+* Fixed a bug where the environment settings were getting short-circuited if the option was unset.
+
 ### 1.1
 * Flipped the logic of the admin setting from checking to _disable_ basic authentication to checking to _enable_ basic authentication, and defaulting to environment-based settings.
 * Added a `is_development_environment` function which includes an added check for `HM_ENV_TYPE` as well as arbitrary definitions that could be added by a filter.
