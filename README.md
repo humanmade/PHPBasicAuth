@@ -17,7 +17,7 @@ After installation and setup, an option to override the default basic auth setti
 Install the plugin via `composer`.
 
 ```bash
-composer require humanmade/PHPBasicAuth
+composer require humanmade/php-basic-auth
 ```
 
 ### Step 2
