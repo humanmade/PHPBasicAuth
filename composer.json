@@ -24,6 +24,9 @@
             "bash .bin/install-wp-tests.sh \"wp_tests\" \"root\" \"\" \"127.0.0.1\" latest"
         ]
     },
+    "require": {
+        "composer/installers": "^1.7.0"
+    },
     "require-dev": {
         "humanmade/coding-standards": "^0.7.0",
         "phpunit/phpunit": "^7.5"
