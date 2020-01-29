@@ -85,6 +85,9 @@ You should also add these lines to your `wp-config-local.sample.php`.
 
 ## Changelog
 
+### 1.1.3
+* Added an action hook to the `is_development_environment` check, to allow actions to be hooked in before checking the environment.
+
 ### 1.1.2
 * Required `composer/installers` so custom install paths can be defined.
 
