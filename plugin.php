@@ -15,4 +15,3 @@ require_once( 'inc/namespace.php' );
 
 // Kick it off.
 bootstrap();
-require_auth();

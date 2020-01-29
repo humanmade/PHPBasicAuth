@@ -14,6 +14,7 @@ namespace HM\BasicAuth;
  */
 function bootstrap() {
 	add_action( 'admin_init', __NAMESPACE__ . '\\register_settings' );
+	add_action( 'init', __NAMESPACE__ . '\\require_auth' );
 }
 
 /**
