@@ -28,6 +28,8 @@ function is_development_environment() : bool {
 	 *
 	 * This allows us to define the constants externally if using the filter is
 	 * too late.
+	 *
+	 * @since 1.1.3
 	 */
 	do_action( 'hmauth_action_before_dev_env_check' );
 
