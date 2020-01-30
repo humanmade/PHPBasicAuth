@@ -14,6 +14,7 @@ namespace HM\BasicAuth;
  */
 function bootstrap() {
 	add_action( 'admin_init', __NAMESPACE__ . '\\register_settings' );
+	add_action( 'init', __NAMESPACE__ . '\\require_auth' );
 }
 
 /**
@@ -22,8 +23,20 @@ function bootstrap() {
  * @return bool Returns true if we are in a dev or staging environment, false if not.
  */
 function is_development_environment() : bool {
-	$hm_dev    = defined( 'HM_DEV' ) && HM_DEV;
-	$altis_dev = defined( 'HM_ENV_TYPE' ) && in_array( HM_ENV_TYPE, [ 'development', 'staging' ] );
+	/**
+	 * Allow an action to be hooked just before we check if we're in a dev
+	 * environment.
+	 *
+	 * This allows us to define the constants externally if using the filter is
+	 * too late.
+	 *
+	 * @since 1.1.3
+	 */
+	do_action( 'hmauth_action_before_dev_env_check' );
+
+	$hm_dev        = defined( 'HM_DEV' ) && HM_DEV;
+	$altis_dev     = defined( 'HM_ENV_TYPE' ) && in_array( HM_ENV_TYPE, [ 'development', 'staging' ] );
+	$creds_defined = defined( 'HM_BASIC_AUTH_USER' ) && defined( 'HM_BASIC_AUTH_PW' );
 
 	/**
 	 * Allow our environments to be filtered outside of the plugin.
@@ -45,7 +58,7 @@ function is_development_environment() : bool {
 		// WordPress exclusions.
 		$exclude &&
 		// If any of the environment checks are true, we're in a dev environment.
-		( $hm_dev || $altis_dev || $other_dev )
+		( $hm_dev || $altis_dev || $creds_defined || $other_dev )
 	) {
 		return true;
 	}
