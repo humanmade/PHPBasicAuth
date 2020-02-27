@@ -46,13 +46,15 @@ function is_development_environment() : bool {
 	$other_dev = apply_filters( 'hmauth_filter_dev_env', false );
 
 	// Don't require auth for AJAX requests.
-	$exclude_ajax   = ! defined( 'DOING_AJAX' ) || false === DOING_AJAX;
+	$exclude_ajax       = ! defined( 'DOING_AJAX' ) || false === DOING_AJAX;
 	// Don't require auth if we're in wp-cli.
-	$exclude_wp_cli = ! defined( 'WP_CLI' ) || false === WP_CLI;
+	$exclude_wp_cli     = ! defined( 'WP_CLI' ) || false === WP_CLI;
 	// Don't require auth when running cron jobs.
-	$exclude_cron   = ! defined( 'DOING_CRON' ) || false === DOING_CRON;
+	$exclude_cron       = ! defined( 'DOING_CRON' ) || false === DOING_CRON;
+	// Don't require auth when installing or doing Altis health checks.
+	$exclude_installing = ! defined( 'WP_INSTALLING' ) || false === WP_INSTALLING;
 
-	$exclude = $exclude_ajax && $exclude_wp_cli && $exclude_cron;
+	$exclude = $exclude_ajax && $exclude_wp_cli && $exclude_cron && $exclude_installing;
 
 	if (
 		// WordPress exclusions.
