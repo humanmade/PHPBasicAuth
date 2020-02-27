@@ -85,6 +85,9 @@ You should also add these lines to your `wp-config-local.sample.php`.
 
 ## Changelog
 
+### 1.1.4
+* Added an exclusion for `WP_INSTALLING` which was resulting in a bug that was failing Altis healthchecks.
+
 ### 1.1.3
 * Added an action hook to the `is_development_environment` check, to allow actions to be hooked in before checking the environment.
 
