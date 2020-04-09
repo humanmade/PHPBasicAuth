@@ -30,11 +30,11 @@ before_script:
   - composer install
   # Install PHPUnit
   - composer run setup
-  - phpunit --version
 
 # Settings here are merged and appended to the Altis base configuration.
 script:
   # Run PHPCS
   - composer run lint
   # Run unit tests
+  - vendor/bin/phpunit --version
   - composer run test
