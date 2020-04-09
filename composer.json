@@ -18,7 +18,7 @@
             "vendor/bin/phpcs --standard=./phpcs.ruleset.xml -p -s -v --extensions=php"
         ],
         "test": [
-            "php vendor/bin/phpunit"
+            "phpunit"
         ],
         "setup": [
             "bash .bin/install-wp-tests.sh \"wp_tests\" \"root\" \"\" \"127.0.0.1\" latest"
