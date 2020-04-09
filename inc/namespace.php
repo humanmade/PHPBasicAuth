@@ -60,7 +60,7 @@ function is_development_environment() : bool {
 		// WordPress exclusions.
 		$exclude &&
 		// If any of the environment checks are true, we're in a dev environment.
-		( $hm_dev || $altis_dev || $other_dev || $creds_defined )
+		( $hm_dev || $altis_dev || ( $other_dev && is_super_admin() ) || $creds_defined )
 	) {
 		return true;
 	}
@@ -69,22 +69,42 @@ function is_development_environment() : bool {
 }
 
 /**
+ * Enable settings on production.
+ *
+ * @return bool
+ */
+function enable_auth(): bool {
+	$other_dev = apply_filters( 'hmauth_filter_dev_env', false );
+
+	if (
+		defined( 'HM_DEV' ) && HM_DEV ||
+		defined( 'HM_ENV_TYPE' ) && HM_ENV_TYPE !== 'production' && ! is_super_admin() && ! $other_dev
+	) {
+		return false;
+	}
+
+	return true;
+}
+
+/**
  * Register the basic auth setting and the new settings field, but only if we're in a dev environment.
  * We don't want basic auth in production.
  */
 function register_settings() {
-	if ( is_development_environment() ) {
-		register_setting( 'general', 'hm-basic-auth', [ 'sanitize_callback' => __NAMESPACE__ . '\\basic_auth_sanitization_callback' ] );
-
-		add_settings_field(
-			'hm-basic-auth',
-			__( 'Enable Basic Authentication', 'hm-basic-auth' ),
-			__NAMESPACE__ . '\\basic_auth_setting_callback',
-			'general',
-			'default',
-			[ 'label_for' => 'hm-basic-auth' ]
-		);
+	if ( ! is_development_environment() || ! enable_auth() ) {
+		return;
 	}
+
+	register_setting( 'general', 'hm-basic-auth', [ 'sanitize_callback' => __NAMESPACE__ . '\\basic_auth_sanitization_callback' ] );
+
+	add_settings_field(
+		'hm-basic-auth',
+		__( 'Enable Basic Authentication', 'hm-basic-auth' ),
+		__NAMESPACE__ . '\\basic_auth_setting_callback',
+		'general',
+		'default',
+		[ 'label_for' => 'hm-basic-auth' ]
+	);
 }
 
 /**
