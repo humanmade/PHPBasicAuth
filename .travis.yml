@@ -28,7 +28,7 @@ matrix:
 # Install dependencies
 before_script:
   - composer install
-  - composer install altis/local-server
+  - composer require altis/local-server
   - composer local-server start
 
 # Settings here are merged and appended to the Altis base configuration.
