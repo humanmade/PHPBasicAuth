@@ -28,14 +28,12 @@ matrix:
 # Install dependencies
 before_script:
   - composer install
-  # Install PHPUnit
-  - composer run setup
+  - composer install altis/local-server
+  - composer local-server start
 
 # Settings here are merged and appended to the Altis base configuration.
 script:
   # Run PHPCS
   - composer run lint
-  # Output the current phpunit version
-  - vendor/bin/phpunit --version
   # Run unit tests
-  - composer run test
+  - composer dev-tools phpunit
