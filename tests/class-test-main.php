@@ -15,8 +15,6 @@ class Test_Main extends \WP_UnitTestCase {
 	 * Check a variety of conditions that would effect whether is_development_environment retuns true or false.
 	 */
 	public function test_is_development_environment() {
-		$this->markTestSkipped( 'Re-add test after $creds_defined is removed check from namespace.php' );
-
 		// Start by assuming we're not in a dev environment.
 		$this->assertFalse(
 			is_development_environment()
