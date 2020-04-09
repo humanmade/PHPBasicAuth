@@ -35,6 +35,7 @@ before_script:
 script:
   # Run PHPCS
   - composer run lint
-  # Run unit tests
+  # Output the current phpunit version
   - vendor/bin/phpunit --version
+  # Run unit tests
   - composer run test
