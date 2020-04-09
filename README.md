@@ -5,10 +5,10 @@
 
 Basic PHP authentication for Human Made Dev and Staging environments.
 
-![screenshot of prompt in google chrome](https://p94.f3.n0.cdn.getcloudapp.com/items/ApujKOdA/Screenshot%202020-04-08%2009.30.46.png?v=0ac5da96009ca70458e433b9be9a0897)  
+![screenshot of prompt in google chrome](https://p94.f3.n0.cdn.getcloudapp.com/items/ApujKOdA/Screenshot%202020-04-08%2009.30.46.png?v=0ac5da96009ca70458e433b9be9a0897)
 Authentication prompt in Google Chrome
 
-![screenshot of prompt in firefox](https://p94.f3.n0.cdn.getcloudapp.com/items/YEu1qdEP/Screenshot%202020-04-08%2009.30.11.png?v=51f9afefaf5b269ec5facbd105f96928)  
+![screenshot of prompt in firefox](https://p94.f3.n0.cdn.getcloudapp.com/items/YEu1qdEP/Screenshot%202020-04-08%2009.30.11.png?v=51f9afefaf5b269ec5facbd105f96928)
 Authentication prompt in Firefox
 
 ## Installation & Setup
@@ -89,6 +89,10 @@ defined( 'HM_LOCAL_DEV' ) or define( 'HM_LOCAL_DEV', true );
 You should also add these lines to your `wp-config-local.sample.php`.
 
 ## Changelog
+
+### 1.1.6
+* Fix unit tests
+* Update composer test script to use composer-installed version of phpunit
 
 ### 1.1.5
 * Fixed bug where the `hmauth_filter_dev_env` is ignored if credentials are already set.
