@@ -26,7 +26,7 @@ require_once $_tests_dir . '/includes/functions.php';
 /**
  * Manually load the files being tested.
  */
-require dirname( dirname( __FILE__ ) ) . '/namespace.php';
+require dirname( dirname( __FILE__ ) ) . '/inc/namespace.php';
 
 // Start up the WP testing environment.
 require $_tests_dir . '/includes/bootstrap.php';
