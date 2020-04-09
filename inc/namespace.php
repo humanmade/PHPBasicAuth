@@ -36,7 +36,6 @@ function is_development_environment() : bool {
 
 	$hm_dev        = defined( 'HM_DEV' ) && HM_DEV;
 	$altis_dev     = defined( 'HM_ENV_TYPE' ) && in_array( HM_ENV_TYPE, [ 'development', 'staging' ] );
-	$creds_defined = defined( 'HM_BASIC_AUTH_USER' ) && defined( 'HM_BASIC_AUTH_PW' );
 
 	/**
 	 * Allow our environments to be filtered outside of the plugin.
@@ -44,6 +43,12 @@ function is_development_environment() : bool {
 	 * @param bool
 	 */
 	$other_dev = apply_filters( 'hmauth_filter_dev_env', false );
+
+	// Bail early if the credentials are missing.
+	$creds_defined = defined( 'HM_BASIC_AUTH_USER' ) && defined( 'HM_BASIC_AUTH_PW' );
+	if ( ! $creds_defined ) {
+		return false;
+	}
 
 	// Don't require auth for AJAX requests.
 	$exclude_ajax       = ! defined( 'DOING_AJAX' ) || false === DOING_AJAX;
