@@ -44,8 +44,9 @@ function is_development_environment() : bool {
 	 */
 	$other_dev = apply_filters( 'hmauth_filter_dev_env', false );
 
-	// Bail early if the credentials are missing.
 	$creds_defined = defined( 'HM_BASIC_AUTH_USER' ) && defined( 'HM_BASIC_AUTH_PW' );
+
+	// Bail early if the credentials are missing.
 	if ( ! $creds_defined ) {
 		return false;
 	}
