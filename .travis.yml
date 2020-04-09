@@ -30,12 +30,20 @@ before_script:
   - composer install
   # Install PHPUnit
   - composer run setup
+  - |
+  echo "TRAVIS_PHP_VERSION:" $TRAVIS_PHP_VERSION;
+  php -v;
+  php -r 'echo "PHP: ".PHP_VERSION."\n";';
+  if [ $(echo "$TRAVIS_PHP_VERSION >= 7.2" | bc -l) -eq 1 ]; then
+    echo using PHPUnit 7.5.2
+    curl -sSfL -o ~/.phpenv/versions/$TRAVIS_PHP_VERSION/bin/phpunit https://phar.phpunit.de/phpunit-7.5.2.phar;
+  fi
 
 # Settings here are merged and appended to the Altis base configuration.
 script:
   # Run PHPCS
   - composer run lint
   # Output the current phpunit version
-  - vendor/bin/phpunit --version
+  - phpunit --version
   # Run unit tests
   - composer run test
