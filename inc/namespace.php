@@ -60,7 +60,7 @@ function is_development_environment() : bool {
 		// WordPress exclusions.
 		$exclude &&
 		// If any of the environment checks are true, we're in a dev environment.
-		( $hm_dev || $altis_dev || $other_dev || $creds_defined )
+		( $hm_dev || $altis_dev || $other_dev )
 	) {
 		return true;
 	}
