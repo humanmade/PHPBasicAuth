@@ -60,7 +60,7 @@ function is_development_environment() : bool {
 		// WordPress exclusions.
 		$exclude &&
 		// If any of the environment checks are true, we're in a dev environment.
-		( $hm_dev || $altis_dev || ( $other_dev && is_super_admin() ) || $creds_defined )
+		( $hm_dev || $altis_dev || $other_dev || $creds_defined )
 	) {
 		return true;
 	}
@@ -74,12 +74,8 @@ function is_development_environment() : bool {
  * @return bool
  */
 function enable_auth(): bool {
-	$other_dev = apply_filters( 'hmauth_filter_dev_env', false );
-
 	if (
-		defined( 'HM_DEV' ) && HM_DEV ||
-		defined( 'HM_ENV_TYPE' ) && HM_ENV_TYPE !== 'production' && ! is_super_admin() && ! $other_dev
-	) {
+		! is_super_admin() && defined( 'HM_ENV_TYPE' ) && HM_ENV_TYPE === 'production' ) {
 		return false;
 	}
 
