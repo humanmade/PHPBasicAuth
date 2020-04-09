@@ -93,6 +93,8 @@ You should also add these lines to your `wp-config-local.sample.php`.
 ### 1.1.6
 * Fix unit tests
 * Update composer test script to use composer-installed version of phpunit
+* Bail early if credentials aren't defined
+* Allow production environments to possibly enable auth
 
 ### 1.1.5
 * Fixed bug where the `hmauth_filter_dev_env` is ignored if credentials are already set.
