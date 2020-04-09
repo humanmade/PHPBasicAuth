@@ -79,9 +79,7 @@ function is_development_environment() : bool {
  * @return bool
  */
 function enable_auth(): bool {
-	if (
-		! is_super_admin() && defined( 'HM_ENV_TYPE' ) && HM_ENV_TYPE === 'production' 
-	) {
+	if ( ! is_super_admin() && defined( 'HM_ENV_TYPE' ) && HM_ENV_TYPE === 'production' ) {
 		return false;
 	}
 
