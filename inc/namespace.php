@@ -150,6 +150,15 @@ function require_auth() {
 		return;
 	}
 
+	$allowed = [
+		'/robots.txt',
+	];
+
+	if ( $_SERVER['REQUEST_URI'] && in_array( $_SERVER['REQUEST_URI'], $allowed, true ) ) {
+		add_filter( 'robots_txt', __NAMESPACE__ . '\\create_robots_file' );
+		return;
+	}
+
 	// Check for a basic auth user and password.
 	if ( defined( 'HM_BASIC_AUTH_PW' ) && defined( 'HM_BASIC_AUTH_USER' ) ) {
 		header( 'Cache-Control: no-cache, must-revalidate, max-age=0' );
@@ -168,4 +177,16 @@ function require_auth() {
 			exit;
 		}
 	}
+}
+
+/**
+ * Filters the robots.txt output.
+ *
+ * @param string $output The robots.txt output.
+ * @return string The robots.txt output.
+ */
+function create_robots_file( string $output ) {
+	$output = "User-agent: *\n";
+	$output .= "Disallow: /\n";
+	return $output;
 }
