@@ -154,6 +154,12 @@ function require_auth() {
 		'/robots.txt',
 	];
 
+	/**
+	 * Filters which pages are allowed through basic auth.
+	 *
+	 */
+	$allowed = apply_filters( 'hm-basic-auth.allowed_pages', $allowed );
+
 	if ( $_SERVER['REQUEST_URI'] && in_array( $_SERVER['REQUEST_URI'], $allowed, true ) ) {
 		add_filter( 'robots_txt', __NAMESPACE__ . '\\create_robots_file' );
 		return;
