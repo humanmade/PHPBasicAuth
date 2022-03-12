@@ -15,7 +15,7 @@
     },
     "scripts": {
         "lint": [
-            "vendor/bin/phpcs --standard=./phpcs.ruleset.xml -p -s -v --extensions=php"
+            "vendor/bin/phpcs --standard=./phpcs.ruleset.xml -p -s -v --extensions=php ."
         ],
         "test": [
             "php vendor/bin/phpunit"
