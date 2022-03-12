@@ -29,7 +29,8 @@
     },
     "require-dev": {
         "humanmade/coding-standards": "^1.1.1",
-        "phpunit/phpunit": "~7.5"
+        "phpunit/phpunit": "~7.5",
+        "yoast/phpunit-polyfills": "^1.0"
     },
     "config": {
         "allow-plugins": {
