@@ -34,8 +34,8 @@ function is_development_environment() : bool {
 	 */
 	do_action( 'hmauth_action_before_dev_env_check' );
 
-	$hm_dev        = defined( 'HM_DEV' ) && HM_DEV;
-	$altis_dev     = defined( 'HM_ENV_TYPE' ) && in_array( HM_ENV_TYPE, [ 'development', 'staging' ], true );
+	$hm_dev = defined( 'HM_DEV' ) && HM_DEV;
+	$altis_dev = defined( 'HM_ENV_TYPE' ) && in_array( HM_ENV_TYPE, [ 'development', 'staging' ], true );
 
 	/**
 	 * Allow our environments to be filtered outside of the plugin.
