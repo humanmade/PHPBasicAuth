@@ -15,7 +15,7 @@
     },
     "scripts": {
         "lint": [
-            "vendor/bin/phpcs --standard=./phpcs.ruleset.xml -p -s -v --extensions=php"
+            "vendor/bin/phpcs --standard=./phpcs.ruleset.xml -p -s -v --extensions=php ."
         ],
         "test": [
             "php vendor/bin/phpunit"
@@ -28,7 +28,14 @@
         "composer/installers": "^1.7.0"
     },
     "require-dev": {
-        "humanmade/coding-standards": "^0.7.0",
-        "phpunit/phpunit": "~7.5"
+        "humanmade/coding-standards": "^1.1.1",
+        "phpunit/phpunit": "~7.5",
+        "yoast/phpunit-polyfills": "^1.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "composer/installers": true
+        }
     }
 }
