@@ -1,6 +1,6 @@
 # Custom Travis configuration for humanmade/php-basic-auth.
 sudo: false
-dist: xenial
+dist: noble
 
 # Ensure PHP CLI and Composer are available.
 language: php
@@ -20,10 +20,10 @@ cache:
   directories:
     - $HOME/.composer/cache
 
-# Only run for PHP 7.2
+# Only run for PHP 8.2
 matrix:
   include:
-    - php: 7.2
+    - php: 8.2
 
 # Install dependencies
 before_script:
