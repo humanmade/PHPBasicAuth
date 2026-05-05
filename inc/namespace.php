@@ -22,7 +22,7 @@ function bootstrap() {
  *
  * @return bool Returns true if we are in a dev or staging environment, false if not.
  */
-function is_development_environment() : bool {
+function is_development_environment(): bool {
 	/**
 	 * Allow an action to be hooked just before we check if we're in a dev
 	 * environment.
@@ -129,7 +129,7 @@ function basic_auth_setting_callback() {
  *
  * @param string $value "off" or "on" based on whether the checkbox was ticked.
  */
-function basic_auth_sanitization_callback( $value ) : string {
+function basic_auth_sanitization_callback( $value ): string {
 	if ( empty( $value ) ) {
 		return 'off';
 	}
