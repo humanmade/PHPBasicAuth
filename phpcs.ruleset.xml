@@ -8,11 +8,6 @@
 	<!-- Add PHPDoc rules -->
 	<rule ref="WordPress-Docs" />
 
-	<!-- phpcompatibility/php-compatibility 9.x cannot run under PHP 8.x -->
-	<rule ref="PHPCompatibility">
-		<exclude name="PHPCompatibility" />
-	</rule>
-
 	<exclude-pattern>php-codesniffer/*</exclude-pattern>
 	<exclude-pattern>**/tests/*</exclude-pattern>
 </ruleset>
